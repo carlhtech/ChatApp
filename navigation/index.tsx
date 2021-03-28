@@ -7,7 +7,7 @@ import { Octicons, MaterialCommunityIcons } from '@expo/vector-icons';
 
 import NotFoundScreen from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
-import BottomTabNavigator from './BottomTabNavigator';
+import MainTabNavigator from './MainTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
 
 // If you are not familiar with React Navigation, we recommend going through the
@@ -31,6 +31,8 @@ function RootNavigator() {
     <Stack.Navigator screenOptions={{
       headerStyle: {
         backgroundColor: Colors.light.tint,
+        shadowOpacity: 0,
+        elevation: 0,
       },
       headerTintColor: Colors.light.background,
       headerTitleAlign: 'left',
@@ -40,13 +42,18 @@ function RootNavigator() {
     }}>
       <Stack.Screen
         name="Root"
-        component={BottomTabNavigator}
+        component={MainTabNavigator}
         options={{
           title: "CarlsApp",
           headerRight: () => (
-            <View style={{flexDirection: 'row'}}>
-              <Octicons name="search" size={24} color={'white'}/>
-              <MaterialCommunityIcons name="dots-vertical" size={24} color={'white'}/>
+            <View style={{
+              flexDirection: 'row',
+              width: 60,
+              justifyContent: 'space-between',
+              marginRight: 10
+            }}>
+              <Octicons name="search" size={22} color={'white'} />
+              <MaterialCommunityIcons name="dots-vertical" size={22} color={'white'} />
             </View>
           )
         }} />
