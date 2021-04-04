@@ -4,10 +4,12 @@ import { StyleSheet } from 'react-native';
 import { Text, View } from '../components/Themed';
 import ChatListItem from '../components/ChatListItem';
 
+import chatRooms from '../data/ChatRooms';
+
 export default function ChatScreen() {
   return (
     <View style={styles.container}>
-      <ChatListItem chatRoom={} />
+      <ChatListItem chatRoom={chatRooms[0]} />
     </View>
   );
 }
