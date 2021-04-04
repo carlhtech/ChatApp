@@ -29,10 +29,10 @@ const style = StyleSheet.create({
         color: 'grey',
     },
     time: {
-        fontSize: 16,
+        fontSize: 14,
         color: 'grey',
         padding: 3,
-    }
+    },
 });
 
 export default style;
