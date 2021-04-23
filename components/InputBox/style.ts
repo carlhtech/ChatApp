@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         margin: 10,
+        alignItems: 'center'
     },
     mainContainer: {
         flexDirection: 'row',
@@ -14,6 +15,14 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         marginRight: 10,
         flex: 1,
+        alignItems: 'flex-end',
+    },
+    textInput: {
+        flex: 1,
+        marginHorizontal: 10,
+    },
+    icon: {
+        marginHorizontal: 5,
     },
     buttonContainer: {
         backgroundColor: Colors.light.tint,
