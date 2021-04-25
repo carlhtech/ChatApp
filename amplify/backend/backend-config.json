@@ -1,1 +1,10 @@
-{}
+{
+  "auth": {
+    "chatappe0676e67": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}
