@@ -8,15 +8,26 @@ import Navigation from './navigation';
 
 import { withAuthenticator } from "aws-amplify-react-native";
 import { getUser } from './src/graphql/queries';
+import { createUser } from './src/graphql/mutations';
 
 import Amplify, { Auth, API, graphqlOperation } from 'aws-amplify'
 import config from './src/aws-exports'
 Amplify.configure(config)
 
+const randomImages = [
+  'https://hieumobile.com/wp-content/uploads/avatar-among-us-2.jpg',
+  'https://hieumobile.com/wp-content/uploads/avatar-among-us-3.jpg',
+  'https://hieumobile.com/wp-content/uploads/avatar-among-us-6.jpg',
+  'https://hieumobile.com/wp-content/uploads/avatar-among-us-9.jpg',
+]
 
 function App() {
   const isLoadingComplete = useCachedResources();
   const colorScheme = useColorScheme();
+
+  const getRandomImage = () => {
+
+  }
 
   // run only when first mounted
   useEffect(() => {
@@ -32,7 +43,15 @@ function App() {
         )
 
         if (userData.data.getUser) {
-          console.log("User is already registered in database")
+          console.log("User is already registered in database");
+          return;
+        }
+
+        const newUser = {
+          id: userInfo.attributes.sub,
+          name: userData.username,
+          imageUri: ,
+          status: 'Hey, I am using ChatApp',
         }
       }
     }
