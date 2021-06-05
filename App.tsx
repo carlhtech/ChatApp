@@ -26,13 +26,12 @@ function App() {
   const colorScheme = useColorScheme();
 
   const getRandomImage = () => {
-
+    return randomImages[Math.floor(Math.random() * randomImages.length)]
   }
 
   // run only when first mounted
   useEffect(() => {
     const fetchUser = async () => {
-      // get autheticated user from auth
       const userInfo = await Auth.currentAuthenticatedUser({ bypassCache: true });
 
       if (userInfo) {
@@ -49,10 +48,16 @@ function App() {
 
         const newUser = {
           id: userInfo.attributes.sub,
-          name: userData.username,
-          imageUri: ,
+          name: userInfo.username,
+          imageUri: getRandomImage(),
           status: 'Hey, I am using ChatApp',
         }
+
+        await API.graphql(
+          graphqlOperation(
+            createUser, {input: newUser}
+          )
+        )
       }
     }
     fetchUser();
