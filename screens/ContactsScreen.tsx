@@ -5,7 +5,6 @@ import { View } from '../components/Themed';
 import ContactListItem from '../components/ContactListItem';
 import { API, graphqlOperation } from "aws-amplify";
 
-import users from '../data/Users';
 import { useEffect, useState } from 'react';
 import { listUsers } from '../src/graphql/queries';
 
