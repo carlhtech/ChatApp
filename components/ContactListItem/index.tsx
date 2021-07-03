@@ -1,9 +1,11 @@
-import moment from 'moment';
 import React from 'react'
 import { View, Text, Image, TouchableWithoutFeedback } from 'react-native'
 import { User } from '../../types';
 import styles from './style';
 import { useNavigation } from '@react-navigation/native';
+
+import { API, graphqlOperation, Auth } from 'aws-amplify';
+import { createChatRoom, createChatRoomUser } from '../../src/graphql/mutations'
 
 export type ContactListItemProps = {
     user: User;
@@ -14,8 +16,45 @@ const ContactListItem = (props: ContactListItemProps) => {
 
     const navigation = useNavigation();
 
-    const onClick = () => {
-        // navigate to chat room
+    const onClick = async () => {
+        try {
+            const newChatRoomData = await API.graphql(
+                graphqlOperation(
+                    createChatRoom, {
+                    input: {}
+                }
+                )
+            )
+
+            if (!newChatRoomData.data) {
+                console.log("Failed to create chatroom")
+                return;
+            }
+
+            const newChatRoom = newChatRoomData.data.createChatRoom;
+
+            await API.graphql(
+                graphqlOperation(
+                    createChatRoomUser, {
+                    userID: user.id,
+                    chatRoomID: newChatRoom.id
+                }
+                )
+            )
+
+            const userInfo = await Auth.currentAuthenticatedUser();
+            await API.graphql(
+                graphqlOperation(
+                    createChatRoomUser, {
+                    userID: userInfo.attributes.sub,
+                    chatRoomID: newChatRoom.id
+                }
+                )
+            )
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     return (
